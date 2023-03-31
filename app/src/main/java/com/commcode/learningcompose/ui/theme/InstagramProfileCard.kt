@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun InstagramProfileCard() {
     Card(
+        modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp),
         backgroundColor = Color.White,
         border = BorderStroke(1.dp, color = Color.Black)
