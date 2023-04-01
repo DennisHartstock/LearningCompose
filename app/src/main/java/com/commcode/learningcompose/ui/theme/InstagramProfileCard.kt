@@ -2,8 +2,9 @@ package com.commcode.learningcompose.ui.theme
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -11,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -38,7 +40,10 @@ fun InstagramProfileCard() {
         ) {
             Image(
                 modifier = Modifier
-                    .size(50.dp),
+                    .size(60.dp)
+                    .clip(CircleShape)
+                    .background(Color.White)
+                    .padding(8.dp),
                 painter = painterResource(id = R.drawable.ic_instagram),
                 contentDescription = "Instagram Logo",
                 contentScale = ContentScale.Crop
@@ -54,15 +59,16 @@ fun InstagramProfileCard() {
 private fun UserStatistics(value: String, title: String) {
     Column(
         modifier = Modifier
-            .border(2.dp, color = Color.Gray)
             .height(80.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
+            modifier = Modifier.padding(start = 4.dp, end = 4.dp),
             text = value, fontSize = 36.sp, fontFamily = FontFamily.Cursive
         )
         Text(
+            modifier = Modifier.padding(start = 4.dp, end = 4.dp),
             text = title, fontWeight = FontWeight.Bold
         )
     }
