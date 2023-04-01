@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -31,26 +32,39 @@ fun InstagramProfileCard() {
         backgroundColor = MaterialTheme.colors.background,
         border = BorderStroke(1.dp, color = MaterialTheme.colors.onBackground)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
+        Column {
+            Row(
                 modifier = Modifier
-                    .size(60.dp)
-                    .clip(CircleShape)
-                    .background(Color.White)
+                    .fillMaxWidth()
                     .padding(8.dp),
-                painter = painterResource(id = R.drawable.ic_instagram),
-                contentDescription = "Instagram Logo",
-                contentScale = ContentScale.Crop
-            )
-            UserStatistics(value = "4.956", title = "Posts")
-            UserStatistics(value = "45M", title = "Followers")
-            UserStatistics(value = "25", title = "Following")
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    modifier = Modifier
+                        .size(60.dp)
+                        .clip(CircleShape)
+                        .background(Color.White)
+                        .padding(8.dp),
+                    painter = painterResource(id = R.drawable.ic_instagram),
+                    contentDescription = "Instagram Logo",
+                    contentScale = ContentScale.Crop
+                )
+                UserStatistics(value = "4.956", title = "Posts")
+                UserStatistics(value = "45M", title = "Followers")
+                UserStatistics(value = "25", title = "Following")
+            }
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "Instagram", fontSize = 30.sp,
+                    fontFamily = FontFamily.Cursive
+                )
+                Text(text = "#HashTag")
+                Text(text = "Homepage")
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Follow")
+                }
+            }
         }
     }
 }
@@ -65,7 +79,7 @@ private fun UserStatistics(value: String, title: String) {
     ) {
         Text(
             modifier = Modifier.padding(start = 4.dp, end = 4.dp),
-            text = value, fontSize = 36.sp, fontFamily = FontFamily.Cursive
+            text = value, fontSize = 24.sp, fontFamily = FontFamily.Cursive
         )
         Text(
             modifier = Modifier.padding(start = 4.dp, end = 4.dp),
