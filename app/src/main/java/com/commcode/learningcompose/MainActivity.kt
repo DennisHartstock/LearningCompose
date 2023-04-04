@@ -38,44 +38,46 @@ class MainActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun ComposeMaterial() {
-//    Example()
-//    Example2()
-    Example3()
-}
-
-@Composable
-private fun Example() {
-    OutlinedButton(onClick = { /*TODO*/ }) {
-        Text(text = "Button")
+private fun Preview() {
+Scaffold(
+    topBar = {
+        TopAppBar(title = {
+            Text(text = "TopAppBar title")
+        },
+            navigationIcon = {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        Icons.Rounded.Menu,
+                        contentDescription = null
+                    )
+                }
+            })
+    },
+    drawerContent = {
+        Text(text = "1")
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(text = "2")
+    },
+    bottomBar = {
+        BottomNavigation() {
+            BottomNavigationItem(
+                icon = {
+                    Icon(
+                        Icons.Rounded.Lock,
+                        contentDescription = null
+                    )
+                },
+                label = { Text(text = "Locked") },
+                selected = true,
+                onClick = { /*TODO*/ }
+            )
+        }
     }
+) {
+    Text(
+        modifier = Modifier.padding(it),
+        text = "Scaffold content"
+    )
 }
-
-@Composable
-private fun Example2() {
-    TextField(value = "Text",
-        onValueChange = {},
-        label = { Text(text = "Label") })
-}
-
-@Composable
-private fun Example3() {
-    AlertDialog(onDismissRequest = { /*TODO*/ },
-        title = {
-            Text(text = "Are you sure?")
-        },
-        text = {
-            Text(text = "Do you really want to delete this file?")
-        },
-        confirmButton = {
-            TextButton(onClick = { /*TODO*/ }) {
-                Text(text = "Yes")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = { /*TODO*/ }) {
-                Text(text = "No")
-            }
-        })
 }
 
