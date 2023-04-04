@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(MaterialTheme.colors.background)
                 ) {
-                    InstagramProfileCard()
+                    ComposeMaterial()
                 }
             }
         }
@@ -38,10 +38,44 @@ class MainActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun Preview() {
-    Image(
-        modifier = Modifier.clip(CircleShape),
-        painter = ColorPainter(color = Color.Cyan),
-        contentDescription = "", contentScale = ContentScale.Crop
-    )
+fun ComposeMaterial() {
+//    Example()
+//    Example2()
+    Example3()
 }
+
+@Composable
+private fun Example() {
+    OutlinedButton(onClick = { /*TODO*/ }) {
+        Text(text = "Button")
+    }
+}
+
+@Composable
+private fun Example2() {
+    TextField(value = "Text",
+        onValueChange = {},
+        label = { Text(text = "Label") })
+}
+
+@Composable
+private fun Example3() {
+    AlertDialog(onDismissRequest = { /*TODO*/ },
+        title = {
+            Text(text = "Are you sure?")
+        },
+        text = {
+            Text(text = "Do you really want to delete this file?")
+        },
+        confirmButton = {
+            TextButton(onClick = { /*TODO*/ }) {
+                Text(text = "Yes")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = { /*TODO*/ }) {
+                Text(text = "No")
+            }
+        })
+}
+
