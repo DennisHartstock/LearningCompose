@@ -39,7 +39,11 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 private fun Preview() {
-    val snackbarHostState = SnackbarHostState()
+
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
+    Log.d("Preview", snackbarHostState.currentSnackbarData.toString)
     val scope = rememberCoroutineScope()
     val fabIsVisible = remember {
         mutableStateOf(true)
