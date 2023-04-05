@@ -39,13 +39,43 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 private fun Preview() {
+    val snackbarHostState = SnackbarHostState()
+    val scope = rememberCoroutineScope()
+    val fabIsVisible = remember {
+        mutableStateOf(true)
+    }
+
 Scaffold(
+    snackbarHost = {
+        SnackbarHost(hostState = snackbarHostState)
+    },
+    floatingActionButton = {
+        if (fabIsVisible.value) {
+            FloatingActionButton(onClick = {
+                scope.launch {
+                    val action = snackbarHostState.showSnackbar(
+                        message = "This is snackbar",
+                        actionLabel = "Hide Fab",
+                        duration = SnackbarDuration.Long
+                    )
+                    if (action == SnackbarResult.ActionPerformed) {
+                        fabIsVisible.value = false
+                    }
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = null
+                )
+            }
+        }
+    },
     topBar = {
         TopAppBar(title = {
             Text(text = "TopAppBar title")
         },
             navigationIcon = {
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {}) {
                     Icon(
                         Icons.Rounded.Menu,
                         contentDescription = null
@@ -69,7 +99,7 @@ Scaffold(
                 },
                 label = { Text(text = "Locked") },
                 selected = true,
-                onClick = { /*TODO*/ }
+                onClick = {}
             )
         }
     }
