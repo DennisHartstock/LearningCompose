@@ -22,6 +22,8 @@ import com.commcode.learningcompose.ui.theme.LearningComposeTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
         setContent {
             LearningComposeTheme {
                 Box(
@@ -29,7 +31,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(MaterialTheme.colors.background)
                 ) {
-                    Preview()
+                    InstagramProfileCard(viewModel)
                 }
             }
         }

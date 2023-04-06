@@ -25,10 +25,11 @@ import androidx.compose.ui.unit.sp
 import com.commcode.learningcompose.R
 
 @Composable
-fun InstagramProfileCard() {
-    val isFollowed = rememberSaveable {
-        mutableStateOf(false)
-    }
+fun InstagramProfileCard(
+    viewModel: MainViewModel
+) {
+    val isFollowed = viewModel.isFollowing.observeAsState(false)
+
     Card(
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp),
@@ -65,7 +66,7 @@ fun InstagramProfileCard() {
                 Text(text = "#HashTag")
                 Text(text = "Homepage")
                 FollowButton(isFollowed = isFollowed.value) {
-                    isFollowed.value = !isFollowed.value
+                    viewModel.changeFollowingStatus
                 }
             }
         }
