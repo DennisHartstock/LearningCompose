@@ -26,6 +26,9 @@ import com.commcode.learningcompose.R
 
 @Composable
 fun InstagramProfileCard() {
+    val isFollowed = rememberSaveable {
+        mutableStateOf(false)
+    }
     Card(
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp),
@@ -61,8 +64,23 @@ fun InstagramProfileCard() {
                 )
                 Text(text = "#HashTag")
                 Text(text = "Homepage")
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Follow")
+                Button(onClick = {
+                    isFollowed.value = !isFollowed.value
+                },
+                colors = ButtonDefaults.buttonColors (
+                    backgroundColor = if(isFollowed.value) {
+                        MaterialTheme.colors.primary.copy(alpha = 0.5f)
+                    } else {
+                        MaterialTheme.colors.primary
+                    }
+                )
+                ) {
+                    val text = if(isFollowed.value) {
+                        "Unfollow"
+                    } else {
+                        "Follow"
+                    }
+                    Text(text = text)
                 }
             }
         }
