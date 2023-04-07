@@ -10,7 +10,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,7 +28,7 @@ import com.commcode.learningcompose.R
 fun InstagramProfileCard(
     viewModel: MainViewModel
 ) {
-    val isFollowed = viewModel.isFollowing.observeAsState(false)
+    val isFollowed by viewModel.isFollowing.observeAsState(false)
 
     Card(
         modifier = Modifier.padding(8.dp),
@@ -65,7 +65,7 @@ fun InstagramProfileCard(
                 )
                 Text(text = "#HashTag")
                 Text(text = "Homepage")
-                FollowButton(isFollowed = isFollowed.value) {
+                FollowButton(isFollowed = isFollowed) {
                     viewModel.changeFollowingStatus
                 }
             }
