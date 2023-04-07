@@ -28,7 +28,7 @@ import com.commcode.learningcompose.R
 fun InstagramProfileCard(
     viewModel: MainViewModel
 ) {
-    val isFollowed by viewModel.isFollowing.observeAsState(false)
+    val isFollowed = viewModel.isFollowing.observeAsState(false)
 
     Card(
         modifier = Modifier.padding(8.dp),
@@ -81,14 +81,14 @@ private fun FollowButton(
     Button(
         onClick = { clickListener() },
     colors = ButtonDefaults.buttonColors (
-        backgroundColor = if(isFollowed) {
+        backgroundColor = if(isFollowed.value) {
             MaterialTheme.colors.primary.copy(alpha = 0.5f)
         } else {
             MaterialTheme.colors.primary
         }
     )
     ) {
-        val text = if(isFollowed) {
+        val text = if(isFollowed.value) {
             "Unfollow"
         } else {
             "Follow"
