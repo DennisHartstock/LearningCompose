@@ -25,17 +25,32 @@ class MainActivity : ComponentActivity() {
         val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         setContent {
-            LearningComposeTheme {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colors.background)
-                ) {
-                    InstagramProfileCard(viewModel)
-                }
-            }
+            PreviewTest(viewModel)
         }
     }
+}
+
+@Composable
+private fun PreviewTest(viewModel: MainViewModel) {
+LearningComposeTheme {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background)
+            ) {
+                LazyColumn {
+                    item{
+                        Text(text = "Title", color = Color.WHITE)
+                    }
+                    item{
+                        Image(painter = painterResource(R.drawable.ic_instagram, contentDescription = null))
+                    }
+                    items(500) {
+                        InstagramProfileCard(viewModel)
+                    }
+                }
+        }
+     }
 }
 
 @Preview
