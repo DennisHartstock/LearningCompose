@@ -39,7 +39,7 @@ LearningComposeTheme {
             .background(MaterialTheme.colors.background)
             ) {
                 val models = viewModel.models.observeAsState(listOf())
-                LazyColumn {
+                LazyRow {
                     items(models.value) {model ->
                         InstagramProfileCard(
                             model = model,
