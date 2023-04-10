@@ -26,10 +26,9 @@ import com.commcode.learningcompose.R
 
 @Composable
 fun InstagramProfileCard(
-    viewModel: MainViewModel
+    model: InstagramModel,
+    onFollowedButtonClickListener: () -> Unit
 ) {
-    val isFollowed = viewModel.isFollowing.observeAsState(false)
-
     Card(
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp),
@@ -60,13 +59,13 @@ fun InstagramProfileCard(
             }
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    text = "Instagram", fontSize = 30.sp,
+                    text = "Instagram ${model.id}", fontSize = 30.sp,
                     fontFamily = FontFamily.Cursive
                 )
-                Text(text = "#HashTag")
+                Text(text = "#${model.title}")
                 Text(text = "Homepage")
-                FollowButton(isFollowed = isFollowed) {
-                    viewModel.changeFollowingStatus
+                FollowButton(isFollowed = model.isFollowed) {
+                    onFollowedButtonClickListener(model)
                 }
             }
         }
@@ -81,14 +80,14 @@ private fun FollowButton(
     Button(
         onClick = { clickListener() },
     colors = ButtonDefaults.buttonColors (
-        backgroundColor = if(isFollowed.value) {
+        backgroundColor = if(isFollowed) {
             MaterialTheme.colors.primary.copy(alpha = 0.5f)
         } else {
             MaterialTheme.colors.primary
         }
     )
     ) {
-        val text = if(isFollowed.value) {
+        val text = if(isFollowed) {
             "Unfollow"
         } else {
             "Follow"

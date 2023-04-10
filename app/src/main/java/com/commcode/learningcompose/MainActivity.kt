@@ -38,15 +38,15 @@ LearningComposeTheme {
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
             ) {
+                val models = viewModel.models.observeAsState(listOf())
                 LazyColumn {
-                    item{
-                        Text(text = "Title", color = Color.WHITE)
-                    }
-                    item{
-                        Image(painter = painterResource(R.drawable.ic_instagram, contentDescription = null))
-                    }
-                    items(500) {
-                        InstagramProfileCard(viewModel)
+                    items(models.value) {model ->
+                        InstagramProfileCard(
+                            model = model,
+                            onFollowedButtonClickListener = {
+                                viewmodel.changeFollowingStatus(it)
+                            }
+                        )
                     }
                 }
         }
