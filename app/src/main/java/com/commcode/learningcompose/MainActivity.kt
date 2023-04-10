@@ -39,7 +39,7 @@ LearningComposeTheme {
             .background(MaterialTheme.colors.background)
             ) {
                 val models = viewModel.models.observeAsState(listOf())
-                LazyRow {
+                LazyVerticalGrid(cells = GridCells.Fixed(2)) {
                     items(models.value) {model ->
                         InstagramProfileCard(
                             model = model,
