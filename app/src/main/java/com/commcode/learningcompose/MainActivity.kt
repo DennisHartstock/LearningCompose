@@ -39,14 +39,41 @@ LearningComposeTheme {
             .background(MaterialTheme.colors.background)
             ) {
                 val models = viewModel.models.observeAsState(listOf())
-                LazyVerticalGrid(cells = GridCells.Fixed(2)) {
-                    items(models.value) {model ->
-                        InstagramProfileCard(
+                LazyColumn {
+                    items(models.value, keys = {it.id}) {model ->
+                        val dismissState = rememberDismissState()
+
+                        if(dismissState.isDismissed(DismissDirection.EndToStart)) {
+                            viewModel.delete(model)
+                        }
+
+                        SwipeToDismiss(
+                            state = dismissState,
+                            directions = listOf(DismissDirection.EndToStart),
+                            background = {
+                                Box(
+                                    modifier = Modifier
+                                    .padding(16.dp)
+                                    .fillMaxSize
+                                    .background = Color.Red.copy(alpha = 0.5f),
+                                    contentAlignment = Alignment.CenterEnd
+                                ) {
+                                    Text(
+                                        modifier = Modifier.padding(16.dp),
+                                        text = "Delete item",
+                                        color = Color.White,
+                                        fontSize = 24.sp
+                                    )
+                                }
+                             }
+                        ) {
+                            InstagramProfileCard(
                             model = model,
                             onFollowedButtonClickListener = {
                                 viewmodel.changeFollowingStatus(it)
                             }
                         )
+                        }
                     }
                 }
         }
