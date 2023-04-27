@@ -10,7 +10,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,7 +25,10 @@ import androidx.compose.ui.unit.sp
 import com.commcode.learningcompose.R
 
 @Composable
-fun InstagramProfileCard() {
+fun InstagramProfileCard(
+    model: InstagramModel,
+    onFollowedButtonClickListener: () -> Unit
+) {
     Card(
         modifier = Modifier.padding(8.dp),
         shape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp),
@@ -56,16 +59,40 @@ fun InstagramProfileCard() {
             }
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    text = "Instagram", fontSize = 30.sp,
+                    text = "Instagram ${model.id}", fontSize = 30.sp,
                     fontFamily = FontFamily.Cursive
                 )
-                Text(text = "#HashTag")
+                Text(text = "#${model.title}")
                 Text(text = "Homepage")
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "Follow")
+                FollowButton(isFollowed = model.isFollowed) {
+                    onFollowedButtonClickListener(model)
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun FollowButton(
+    isFollowed: Boolean,
+    clickListener: () -> Unit
+) {
+    Button(
+        onClick = { clickListener() },
+    colors = ButtonDefaults.buttonColors (
+        backgroundColor = if(isFollowed) {
+            MaterialTheme.colors.primary.copy(alpha = 0.5f)
+        } else {
+            MaterialTheme.colors.primary
+        }
+    )
+    ) {
+        val text = if(isFollowed) {
+            "Unfollow"
+        } else {
+            "Follow"
+        }
+        Text(text = text)
     }
 }
 
