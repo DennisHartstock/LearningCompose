@@ -4,6 +4,7 @@ package com.commcode.learningcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.commcode.learningcompose.ui.screen.Animation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,7 +12,8 @@ class MainActivity : ComponentActivity() {
 //        val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         setContent {
-            ActivityResultTest()
+            Animation()
+//            ActivityResultTest()
 //            PreviewTest(viewModel)
         }
     }
