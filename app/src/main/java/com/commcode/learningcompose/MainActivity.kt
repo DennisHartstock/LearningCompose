@@ -4,7 +4,12 @@ package com.commcode.learningcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.commcode.learningcompose.ui.screen.Animation
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.ui.Modifier
+import com.commcode.learningcompose.ui.screen.AnimateContent
+import com.commcode.learningcompose.ui.theme.LearningComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,9 +17,17 @@ class MainActivity : ComponentActivity() {
 //        val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         setContent {
-            Animation()
+            LearningComposeTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    AnimateContent()
+//            Animation()
 //            ActivityResultTest()
 //            PreviewTest(viewModel)
+                }
+            }
         }
     }
 }
